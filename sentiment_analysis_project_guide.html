@@ -1,0 +1,314 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); color: var(--color-text-primary); }
+h2 { font-size: 18px; font-weight: 500; margin-bottom: 1rem; }
+h3 { font-size: 15px; font-weight: 500; margin-bottom: 0.5rem; }
+p, li { font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); }
+code { font-family: var(--font-mono); font-size: 12px; background: var(--color-background-secondary); padding: 2px 6px; border-radius: 4px; color: var(--color-text-primary); }
+pre { font-family: var(--font-mono); font-size: 12px; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 1rem; overflow-x: auto; line-height: 1.6; color: var(--color-text-primary); }
+.badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 99px; }
+.badge-blue { background: #E6F1FB; color: #0C447C; }
+.badge-teal { background: #E1F5EE; color: #085041; }
+.badge-amber { background: #FAEEDA; color: #633806; }
+.badge-coral { background: #FAECE7; color: #712B13; }
+.badge-green { background: #EAF3DE; color: #27500A; }
+.section { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1rem; background: var(--color-background-primary); }
+.meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+.tab-bar { display: flex; gap: 4px; margin-bottom: 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.tab { font-size: 13px; padding: 8px 14px; cursor: pointer; color: var(--color-text-secondary); border-bottom: 2px solid transparent; margin-bottom: -0.5px; background: none; border-top: none; border-left: none; border-right: none; }
+.tab.active { color: var(--color-text-primary); border-bottom: 2px solid #185FA5; font-weight: 500; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.ds-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 1rem; margin-bottom: 0.75rem; }
+.ds-card:hover { border-color: var(--color-border-secondary); }
+.ds-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+.ds-name { font-size: 14px; font-weight: 500; }
+.ds-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.step-row { display: flex; gap: 12px; margin-bottom: 1rem; align-items: flex-start; }
+.step-num { width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: #E6F1FB; color: #185FA5; font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+.step-body h3 { margin-bottom: 0.25rem; }
+.checklist-item { display: flex; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 14px; }
+.checklist-item:last-child { border-bottom: none; }
+.check-circle { width: 18px; height: 18px; min-width: 18px; border-radius: 50%; border: 1.5px solid var(--color-border-secondary); display: flex; align-items: center; justify-content: center; }
+.rubric-bar { height: 8px; border-radius: 4px; margin-bottom: 4px; }
+.rubric-row { margin-bottom: 1rem; }
+.copy-btn { font-size: 11px; padding: 3px 10px; cursor: pointer; float: right; color: var(--color-text-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-secondary); }
+.copy-btn:hover { color: var(--color-text-primary); }
+.tip { background: #E6F1FB; border-left: 3px solid #185FA5; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 13px; color: #0C447C; }
+</style>
+
+<h2 style="style: padding-top:0.5rem; margin-bottom:0.25rem;">Task 3 — Sentiment Analysis</h2>
+<div class="meta-row">
+  <span class="badge badge-blue">Beginner–Intermediate</span>
+  <span class="badge badge-amber">5–7 hrs</span>
+  <span class="badge badge-teal">Python · NLP</span>
+  <span class="badge badge-coral">scikit-learn · transformers · nltk</span>
+</div>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="switchTab('datasets')">Datasets</button>
+  <button class="tab" onclick="switchTab('steps')">Steps & Code</button>
+  <button class="tab" onclick="switchTab('deliverables')">Deliverables</button>
+  <button class="tab" onclick="switchTab('rubric')">Rubric</button>
+</div>
+
+<div id="tab-datasets" class="tab-content active">
+
+  <div class="tip">All datasets below are freely available and beginner-friendly. Choose one based on your time and difficulty preference.</div>
+
+  <div class="ds-card">
+    <div class="ds-header">
+      <div class="ds-name">IMDB Movie Reviews <span style="font-weight:400;color:var(--color-text-secondary)">— Recommended #1</span></div>
+      <span class="badge badge-teal">Best for Beginners</span>
+    </div>
+    <div class="ds-meta">
+      <span class="badge badge-blue">50,000 reviews</span>
+      <span class="badge badge-amber">Binary: Positive / Negative</span>
+      <span class="badge badge-green">Balanced</span>
+    </div>
+    <p style="margin-bottom:0.5rem;">Long-form movie reviews pre-labelled as positive or negative. The gold standard for binary sentiment benchmarking. Loads directly via HuggingFace or Keras — no manual download needed.</p>
+    <pre style="margin-bottom:0.5rem;">from datasets import load_dataset
+ds = load_dataset("imdb")   # auto-downloads via HuggingFace
+print(ds["train"][0])</pre>
+    <p style="font-size:12px;">Or: <code>pip install tensorflow</code> then <code>keras.datasets.imdb.load_data()</code></p>
+    <p style="font-size:12px; margin-top:4px;">Manual: <a href="https://huggingface.co/datasets/stanfordnlp/imdb" style="color:#185FA5;">huggingface.co/datasets/stanfordnlp/imdb</a></p>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-header">
+      <div class="ds-name">Sentiment140 (Twitter)</div>
+      <span class="badge badge-blue">Social Media</span>
+    </div>
+    <div class="ds-meta">
+      <span class="badge badge-blue">1.6 million tweets</span>
+      <span class="badge badge-amber">Binary: 0=Negative, 4=Positive</span>
+      <span class="badge badge-green">Balanced</span>
+    </div>
+    <p style="margin-bottom:0.5rem;">Real tweets collected using emoticons as noisy labels. Great for learning about short-text/social media quirks (slang, hashtags, @mentions). Recommended if your project focuses on social media analysis.</p>
+    <pre style="margin-bottom:0.5rem;">import pandas as pd
+cols = ["sentiment","id","date","flag","user","text"]
+df = pd.read_csv("training.1600000.processed.noemoticon.csv",
+                 encoding="latin-1", names=cols)
+df["label"] = df["sentiment"].map({0:0, 4:1})  # remap</pre>
+    <p style="font-size:12px;">Download: <a href="https://www.kaggle.com/datasets/kazanova/sentiment140" style="color:#185FA5;">kaggle.com/datasets/kazanova/sentiment140</a> · also at <a href="http://help.sentiment140.com/home" style="color:#185FA5;">sentiment140.com</a></p>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-header">
+      <div class="ds-name">Stanford Sentiment Treebank v2 (SST-2)</div>
+      <span class="badge badge-coral">Advanced</span>
+    </div>
+    <div class="ds-meta">
+      <span class="badge badge-blue">~11,000 sentences</span>
+      <span class="badge badge-amber">Binary: Positive / Negative</span>
+      <span class="badge badge-coral">Fine-grained optional</span>
+    </div>
+    <p style="margin-bottom:0.5rem;">Human-annotated movie review sentences with phrase-level labels. Compact and clean — ideal for fine-tuning a BERT model. Also used as a GLUE benchmark task.</p>
+    <pre>from datasets import load_dataset
+ds = load_dataset("sst2")
+print(ds["train"][0])  # {"sentence": "...", "label": 1}</pre>
+    <p style="font-size:12px;">Download: <a href="https://huggingface.co/datasets/sst2" style="color:#185FA5;">huggingface.co/datasets/sst2</a></p>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-header">
+      <div class="ds-name">Reddit Comments (r/movies sample)</div>
+      <span class="badge badge-amber">DIY</span>
+    </div>
+    <div class="ds-meta">
+      <span class="badge badge-blue">Custom size</span>
+      <span class="badge badge-amber">Unlabelled → label with VADER</span>
+    </div>
+    <p style="margin-bottom:0.5rem;">Pull live Reddit data and auto-label with VADER for a real-world pipeline exercise. Good for showcasing end-to-end data collection to inference.</p>
+    <pre>pip install praw vaderSentiment
+# Use PRAW to pull r/movies comments, then:
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+sia = SentimentIntensityAnalyzer()
+score = sia.polarity_scores(text)["compound"]
+label = 1 if score >= 0.05 else 0  # 1=pos, 0=neg</pre>
+    <p style="font-size:12px;"><a href="https://www.reddit.com/dev/api/" style="color:#185FA5;">reddit.com/dev/api</a> — free API key in Reddit settings</p>
+  </div>
+
+</div>
+
+<div id="tab-steps" class="tab-content">
+
+  <div class="step-row">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h3>Setup & install</h3>
+      <pre>pip install pandas scikit-learn nltk transformers datasets torch
+python -m nltk.downloader stopwords punkt</pre>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h3>Text cleaning</h3>
+      <pre>import re, nltk
+from nltk.corpus import stopwords
+stop = set(stopwords.words("english"))
+
+def clean(text):
+    text = text.lower()
+    text = re.sub(r"<.*?>", " ", text)      # strip HTML
+    text = re.sub(r"http\S+", "", text)     # strip URLs
+    text = re.sub(r"[^a-z\s]", "", text)   # keep letters only
+    tokens = text.split()
+    return " ".join(w for w in tokens if w not in stop)</pre>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h3>Baseline — TF-IDF + Logistic Regression</h3>
+      <pre>from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
+
+X_train = [clean(t) for t in train_texts]
+X_test  = [clean(t) for t in test_texts]
+
+vec = TfidfVectorizer(max_features=20000, ngram_range=(1,2))
+X_tr = vec.fit_transform(X_train)
+X_te = vec.transform(X_test)
+
+clf = LogisticRegression(max_iter=500)
+clf.fit(X_tr, y_train)
+preds = clf.predict(X_te)
+
+print("Accuracy:", accuracy_score(y_test, preds))
+print("F1 Score:", f1_score(y_test, preds))
+print("Confusion Matrix:\n", confusion_matrix(y_test, preds))</pre>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h3>Advanced — fine-tune DistilBERT (HuggingFace)</h3>
+      <pre>from transformers import pipeline
+
+# Zero-shot inference (no training needed)
+clf = pipeline("sentiment-analysis",
+               model="distilbert-base-uncased-finetuned-sst-2-english")
+
+result = clf("This movie was absolutely brilliant!")
+print(result)  # [{'label': 'POSITIVE', 'score': 0.9998}]
+
+# For fine-tuning on your own data, see:
+# huggingface.co/docs/transformers/training</pre>
+      <div class="tip">For the evaluation rubric's "Advanced" tier, show both the baseline AND the transformer approach side-by-side in your metrics table.</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <h3>Confusion matrix plot</h3>
+      <pre>import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_test, preds)
+plt.figure(figsize=(5,4))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
+            xticklabels=["Negative","Positive"],
+            yticklabels=["Negative","Positive"])
+plt.title("Confusion Matrix — TF-IDF + LR")
+plt.ylabel("True label"); plt.xlabel("Predicted label")
+plt.tight_layout(); plt.savefig("confusion_matrix.png", dpi=150)
+plt.show()</pre>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <h3>Save the model</h3>
+      <pre>import joblib
+
+# Save sklearn model
+joblib.dump(clf, "lr_sentiment_model.pkl")
+joblib.dump(vec, "tfidf_vectorizer.pkl")
+
+# Load later:
+clf = joblib.load("lr_sentiment_model.pkl")
+vec = joblib.load("tfidf_vectorizer.pkl")</pre>
+    </div>
+  </div>
+
+</div>
+
+<div id="tab-deliverables" class="tab-content">
+  <p style="margin-bottom:1rem;">Tick off each deliverable before submission:</p>
+  <div class="checklist-item"><div class="check-circle"></div><span><strong>Training notebook</strong> — <code>sentiment_analysis.ipynb</code> with markdown cells explaining each step</span></div>
+  <div class="checklist-item"><div class="check-circle"></div><span><strong>Saved model</strong> — <code>lr_sentiment_model.pkl</code> + <code>tfidf_vectorizer.pkl</code> (or HuggingFace model folder)</span></div>
+  <div class="checklist-item"><div class="check-circle"></div><span><strong>Inference script</strong> — <code>predict.py</code> that loads model and runs on new text input</span></div>
+  <div class="checklist-item"><div class="check-circle"></div><span><strong>Metrics table</strong> — Accuracy, Precision, Recall, F1 for both baseline and advanced model</span></div>
+  <div class="checklist-item"><div class="check-circle"></div><span><strong>Confusion matrix image</strong> — <code>confusion_matrix.png</code> for each model</span></div>
+  <div class="checklist-item"><div class="check-circle"></div><span><strong>README</strong> — dataset used, how to run, expected results</span></div>
+
+  <div style="margin-top:1.5rem;">
+    <h3 style="margin-bottom:0.75rem;">Sample metrics table (fill in your values)</h3>
+    <pre>| Model               | Accuracy | Precision | Recall | F1    |
+|---------------------|----------|-----------|--------|-------|
+| TF-IDF + LR         | 0.892    | 0.891     | 0.893  | 0.892 |
+| DistilBERT (HF)     | 0.934    | 0.935     | 0.933  | 0.934 |</pre>
+  </div>
+
+  <div class="tip" style="margin-top:1rem;">Run <code>from sklearn.metrics import classification_report</code> to get Precision, Recall, and F1 all at once.</div>
+</div>
+
+<div id="tab-rubric" class="tab-content">
+
+  <div class="rubric-row">
+    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+      <span style="font-size:13px; font-weight:500;">Pipeline (35 pts)</span>
+      <span style="font-size:13px; color:var(--color-text-secondary);">35%</span>
+    </div>
+    <div class="rubric-bar" style="background:#185FA5; width:35%;"></div>
+    <p style="font-size:12px;">End-to-end flow: loading data → cleaning → vectorizing → training → inference. Both baseline + advanced model.</p>
+  </div>
+
+  <div class="rubric-row">
+    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+      <span style="font-size:13px; font-weight:500;">Performance (35 pts)</span>
+      <span style="font-size:13px; color:var(--color-text-secondary);">35%</span>
+    </div>
+    <div class="rubric-bar" style="background:#0F6E56; width:35%;"></div>
+    <p style="font-size:12px;">Baseline accuracy ≥ 85%, advanced ≥ 90%. Confusion matrix + F1 score. Comparison between models.</p>
+  </div>
+
+  <div class="rubric-row">
+    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+      <span style="font-size:13px; font-weight:500;">Clarity (20 pts)</span>
+      <span style="font-size:13px; color:var(--color-text-secondary);">20%</span>
+    </div>
+    <div class="rubric-bar" style="background:#BA7517; width:20%;"></div>
+    <p style="font-size:12px;">Notebook has markdown explanations. Code is readable with comments. Plots are labelled.</p>
+  </div>
+
+  <div class="rubric-row">
+    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+      <span style="font-size:13px; font-weight:500;">Reusability (10 pts)</span>
+      <span style="font-size:13px; color:var(--color-text-secondary);">10%</span>
+    </div>
+    <div class="rubric-bar" style="background:#639922; width:10%;"></div>
+    <p style="font-size:12px;">Model saved to disk. Inference script works standalone. README explains how to reproduce.</p>
+  </div>
+
+  <div class="tip">Scoring tip: the biggest gains are split evenly between Pipeline and Performance (35 pts each). Nail your cleaning code and show results for both models to maximise marks.</div>
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector('[onclick="switchTab(\'' + name + '\')"]').classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+</script>
