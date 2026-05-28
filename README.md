@@ -46,7 +46,7 @@ sentiment-analysis/
 
 A self-contained **interactive HTML guide** is included — open it in any browser for a full project walkthrough with tabbed navigation:
 
-**view the guide**(https://reddynohith.github.io/Sentiment_Analysis/sentiment_analysis_project_guide.html)
+[view the complete guide here](https://reddynohith.github.io/Sentiment_Analysis/sentiment_analysis_project_guide.html)
 
 **What the guide covers:**
 
